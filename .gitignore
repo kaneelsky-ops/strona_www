@@ -1,0 +1,11 @@
+node_modules/
+.vercel/
+str/
+
+# Original HTTrack backup, retained locally; the deployed site lives in public/.
+/hts-cache/
+/hts-log.txt
+/www.kaneel.pl/
+/backblue.gif
+/fade.gif
+/index.html

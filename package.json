@@ -1,0 +1,11 @@
+{
+  "name": "kaneel-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node build-static.cjs"
+  },
+  "engines": {
+    "node": "22.x"
+  }
+}
