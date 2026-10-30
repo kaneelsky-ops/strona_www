@@ -1,5 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
+require('./scripts/build-pages.cjs');
 const root = path.join(__dirname, 'public');
 const index = path.join(root, 'index.html');
 if (!fs.existsSync(index)) throw new Error('Missing public/index.html');
@@ -16,7 +17,7 @@ function inspect(directory) {
       if (!size) throw new Error('Empty file: ' + full);
       files++;
       bytes += size;
-      if (/\.(html|css)$/.test(entry.name)) textFiles.push(full);
+      if (/\.(html|css|js|mjs)$/.test(entry.name)) textFiles.push(full);
     }
   }
 }
@@ -25,14 +26,20 @@ const missing = new Set();
 let references = 0;
 function checkReference(value, source) {
   value = value.trim().replace(/&amp;/g, '&');
-  if (!value || /^(?:[a-z][a-z\d+.-]*:|\/\/|#)/i.test(value)) return;
+  if (!value || /^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(value)) return;
   const pathname = decodeURIComponent(value.split(/[?#]/)[0]);
-  const target = pathname.startsWith('/')
+  let target = pathname.startsWith('/')
     ? path.join(root, pathname.slice(1))
-    : path.resolve(path.dirname(source), pathname);
+    : pathname ? path.resolve(path.dirname(source), pathname) : source;
   references++;
+  if (fs.existsSync(target) && fs.statSync(target).isDirectory()) target = path.join(target, 'index.html');
   if (!fs.existsSync(target) || !fs.statSync(target).isFile()) {
     missing.add(path.relative(__dirname, source) + ': ' + value);
+  } else if (value.includes('#') && target.endsWith('.html')) {
+    const fragment = decodeURIComponent(value.slice(value.indexOf('#') + 1));
+    if (fragment && !fs.readFileSync(target, 'utf8').includes(`id="${fragment}"`)) {
+      missing.add(path.relative(__dirname, source) + ': missing anchor ' + value);
+    }
   }
 }
 for (const file of textFiles) {
@@ -49,8 +56,12 @@ for (const file of textFiles) {
     if (/\/_next\/image\?/.test(text)) {
       throw new Error('Static hosting cannot serve the Next.js image optimizer. Use image files directly.');
     }
-  } else {
+  } else if (file.endsWith('.css')) {
     for (const match of text.matchAll(/url\(\s*["']?([^\s"')]+)["']?\s*\)/g)) {
+      checkReference(match[1], file);
+    }
+  } else {
+    for (const match of text.matchAll(/\bfrom\s+["'](\.[^"']+)["']/g)) {
       checkReference(match[1], file);
     }
   }

@@ -1,0 +1,24 @@
+{
+  "siteUrl": "https://www.kaneel.pl",
+  "contactEmail": "kontakt@kaneel.pl",
+  "pages": [
+    {
+      "template": "home",
+      "path": "/",
+      "title": "Kaneel – Numerolog, Astrologia i Human Design | Odkryj Siebie",
+      "description": "Szukasz głębokiego zrozumienia? W Kaneel znajdziesz bezpieczną przestrzeń, ciepłe otulenie i holistyczną analizę numerologiczną. Odkryj swoją drogę życia!"
+    },
+    {
+      "template": "calculator",
+      "path": "/kalkulator-numerologiczny",
+      "title": "Darmowy Kalkulator Numerologiczny – Oblicz Swoją Liczbę | Kaneel",
+      "description": "Darmowy kalkulator numerologiczny: wpisz imię, nazwisko lub nazwę firmy i poznaj liczbę nazwy, duszy i osobowości. System pitagorejski, obliczenia krok po kroku."
+    },
+    {
+      "template": "knowledge",
+      "path": "/kacik-wiedzy",
+      "title": "Kącik Wiedzy – Darmowe Podstawy i Nauka Numerologii | Kaneel",
+      "description": "Chcesz poznać podstawy numerologii? Wejdź do Kącika Wiedzy w Kaneel i odkryj darmowe artykuły o wibracjach liczb, które pomogą Ci zrozumieć siebie."
+    }
+  ]
+}
