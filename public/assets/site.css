@@ -101,6 +101,8 @@ textarea.contact-input { resize: vertical; }
 .contact-input:focus, #calc-name:focus { border-color: var(--kaneel-cinnamon); outline: 2px solid var(--kaneel-cinnamon); outline-offset: 3px; }
 .form-hint { color: var(--kaneel-ink-soft); font-size: .78rem; line-height: 1.8; }
 .contact-form .text-link { font-size: .8rem; }
+.contact-honeypot { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.contact-form button:disabled { cursor: wait; opacity: .7; }
 .subpage-hero { padding-top: 160px; padding-bottom: 100px; background: var(--kaneel-wood); color: var(--kaneel-cream); }
 .subpage-hero .eyebrow { color: #c99c7f; }
 .subpage-hero h1 { max-width: 950px; margin-top: 24px; font: 400 clamp(2.7rem, 5.4vw, 4.7rem)/1.06 var(--serif); letter-spacing: -.01em; text-wrap: balance; }

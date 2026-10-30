@@ -354,7 +354,11 @@
 </p>
 </div>
 </div>
-<form id="contact-form" class="contact-form" action="mailto:{{CONTACT_EMAIL}}" method="get" data-email="{{CONTACT_EMAIL}}">
+<form id="contact-form" class="contact-form" action="/api/contact" method="post">
+<div class="contact-honeypot" aria-hidden="true">
+<label for="contact-website">Pozostaw to pole puste</label>
+<input type="text" id="contact-website" name="website" autocomplete="off" tabindex="-1" maxlength="200">
+</div>
 <fieldset>
 <legend>Wybierz usługi <span>(możesz kilka – pakiet)</span>
 </legend>
@@ -407,13 +411,13 @@
 <textarea class="contact-input" id="contact-message" name="msg" rows="5" maxlength="5000" placeholder="Napisz kilka słów o tym, z czym przychodzisz.">
 </textarea>
 </div>
-<p class="form-hint">Formularz przygotuje wiadomość w Twojej aplikacji pocztowej. Dane nie są wysyłane ani zapisywane na stronie.</p>
+<p class="form-hint">Formularz wysyła wiadomość bezpośrednio do Kaneel przez Gmail API. Nie musisz otwierać aplikacji pocztowej ani logować się do Google. Potwierdzenie pojawi się po przyjęciu wiadomości przez usługę pocztową.</p>
 <p class="form-hint contact-privacy">Administratorem danych jest Alexandra Orin, prowadząca Kaneel. Dane podane w formularzu wykorzystujemy do obsługi Twojego zapytania. Szczegóły znajdziesz w <a href="/polityka-prywatnosci.html">Polityce prywatności</a>.</p>
 <button type="submit" class="button button-primary">Wyślij zgłoszenie <span aria-hidden="true">↗</span>
 </button>
-<p id="contact-status" class="form-hint" role="status" hidden="">
+<p id="contact-status" class="form-hint" role="status" aria-live="polite" aria-atomic="true" hidden="">
 </p>
-<a id="contact-fallback" class="text-link" hidden="">Otwórz przygotowaną wiadomość ponownie</a>
+<noscript><p class="form-hint">Wysyłka formularza wymaga JavaScriptu. Możesz napisać bezpośrednio na <a class="text-link" href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a>.</p><style>#contact-form button[type="submit"] { display: none; }</style></noscript>
 </form>
 </div>
 </section>

@@ -1,6 +1,7 @@
 const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
+const contact = require('../api/contact.js');
 require('../build-static.cjs');
 
 const root = path.resolve(__dirname, '../public');
@@ -11,6 +12,9 @@ const types = {
   '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml; charset=utf-8',
 };
 http.createServer((request, response) => {
+  if (new URL(request.url, 'http://localhost').pathname === '/api/contact') {
+    return contact(request, response);
+  }
   let file;
   try { file = path.resolve(root, '.' + decodeURIComponent(new URL(request.url, 'http://localhost').pathname)); }
   catch { response.writeHead(400); response.end('Bad request'); return; }

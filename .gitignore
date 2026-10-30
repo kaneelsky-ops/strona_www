@@ -1,6 +1,9 @@
 node_modules/
 .vercel/
 str/
+.env
+.env.*
+!.env.example
 
 # Original HTTrack backup, retained locally; the deployed site lives in public/.
 /hts-cache/

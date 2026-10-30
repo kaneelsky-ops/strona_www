@@ -127,20 +127,17 @@
 
     <section aria-labelledby="formularz">
       <h2 id="formularz">4. Formularz i poczta elektroniczna</h2>
-      <h3>Obecny sposób kontaktu</h3>
-      <p>Formularz przygotowuje wiadomość w Twojej aplikacji pocztowej. Dane wpisane w formularzu nie są przesyłane do serwera Kaneel. Przekazanie wiadomości do Kaneel następuje dopiero po jej wysłaniu w aplikacji pocztowej. Samo kliknięcie przycisku formularza nie potwierdza wysłania ani doręczenia wiadomości.</p>
-      <p>Zasady działania wybranego programu i dostawcy Twojej poczty wynikają również z ich własnych warunków. Jeśli aplikacja pocztowa nie otworzy się automatycznie, możesz napisać bezpośrednio na <a href="mailto:kontakt@kaneel.pl">kontakt@kaneel.pl</a>.</p>
-
-      <h3>Planowana automatyczna wysyłka przez Gmail API</h3>
-      <p>Automatyczna wysyłka przez Gmail API nie jest obecnie uruchomiona. Poniższy opis dotyczy planowanej integracji. Przed jej włączeniem zaktualizujemy politykę oraz informację przy formularzu zgodnie z rzeczywistym sposobem działania.</p>
-      <p>Po uruchomieniu integracji dane formularza będą przekazywane przez funkcję serwerową do Google w celu wysłania wiadomości na skonfigurowany adres obsługi Kaneel. Potwierdzenie wysłania będzie wyświetlane dopiero po przyjęciu wiadomości przez usługę pocztową; nie będzie oznaczać potwierdzenia jej odczytania przez odbiorcę.</p>
-      <p>Planowana integracja będzie korzystała z konta pocztowego autoryzowanego przez osobę uprawnioną do obsługi serwisu. Odwiedzający stronę nie będzie musiał udzielać dostępu do swojej skrzynki Google.</p>
-      <p>Jedynym planowanym zakresem dostępu jest <code>https://www.googleapis.com/auth/gmail.send</code>, służący do wysyłania wiadomości. Nie planujemy uprawnień do odczytywania skrzynki, przeglądania kontaktów ani pobierania historii korespondencji.</p>
-      <p>W ramach tej wysyłki przetwarzane będą dane nadawcy i odbiorcy, temat i treść wiadomości oraz techniczna odpowiedź API, np. identyfikator wysłanej wiadomości. Adres podany w formularzu będzie mógł być używany jako adres odpowiedzi, aby umożliwić dalszy kontakt.</p>
-      <p>Dane uwierzytelniające planowanej integracji, w tym tokeny OAuth, będą przechowywane wyłącznie po stronie serwera i nie będą udostępniane odwiedzającym stronę.</p>
-      <p>Informacje przetwarzane w związku z Google API będą wykorzystywane wyłącznie do obsługi opisanej funkcji komunikacyjnej i jej bezpieczeństwa. Nie będą sprzedawane ani wykorzystywane do reklamy behawioralnej lub trenowania modeli sztucznej inteligencji.</p>
-      <p>Korzystanie z danych otrzymanych za pośrednictwem Google API będzie podlegało <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, w tym wymaganiom Limited Use.</p>
-      <p>Po uruchomieniu integracji osoba, która ją autoryzowała, będzie mogła cofnąć dostęp w <a href="https://myaccount.google.com/connections">ustawieniach połączeń swojego konta Google</a>. Cofnięcie dostępu zatrzyma możliwość dalszego korzystania z integracji. Nie usunie automatycznie wiadomości wysłanych wcześniej. O usunięcie danych znajdujących się po stronie Kaneel można wystąpić pod adresem <a href="mailto:kontakt@kaneel.pl">kontakt@kaneel.pl</a>.</p>
+      <h3>Automatyczna wysyłka przez Gmail API</h3>
+      <p>Formularz wysyła wiadomość bezpośrednio ze strony. Dane przekazywane są przez szyfrowane połączenie do funkcji serwerowej Kaneel na Vercel, a następnie do Google w celu wysłania wiadomości na skonfigurowany po stronie serwera adres obsługi Kaneel. Nie musisz otwierać aplikacji pocztowej ani logować się do Google.</p>
+      <p>Potwierdzenie pojawia się dopiero po przyjęciu wiadomości przez Gmail API. Nie oznacza potwierdzenia jej odczytania przez odbiorcę. Jeżeli wystąpi błąd, formularz zachowuje wpisane dane. Przy niepewnym wyniku połączenia wiadomość mogła zostać przyjęta; nie należy ponawiać zgłoszenia od razu. Kod strony nie ponawia automatycznie wysyłki.</p>
+      <p>Możesz też napisać bezpośrednio na <a href="mailto:kontakt@kaneel.pl">kontakt@kaneel.pl</a>. W takim przypadku zastosowanie mają również zasady używanego przez Ciebie programu i dostawcy poczty.</p>
+      <p>Integracja korzysta z konta pocztowego autoryzowanego przez osobę uprawnioną do obsługi serwisu. Odwiedzający stronę nie udziela dostępu do swojej skrzynki Google.</p>
+      <p>Wykorzystywany zakres dostępu to wyłącznie <code>https://www.googleapis.com/auth/gmail.send</code>, służący do wysyłania wiadomości. Integracja nie korzysta z uprawnień do odczytywania skrzynki, przeglądania kontaktów ani pobierania historii korespondencji.</p>
+      <p>W ramach wysyłki przetwarzane są dane nadawcy i odbiorcy, temat i treść wiadomości oraz techniczna odpowiedź API, np. identyfikator wysłanej wiadomości. Adres podany w formularzu jest używany jako adres odpowiedzi, aby umożliwić dalszy kontakt.</p>
+      <p>Dane uwierzytelniające integracji, w tym tokeny OAuth, są przechowywane wyłącznie po stronie serwera w konfiguracji środowiska i nie są udostępniane odwiedzającym stronę.</p>
+      <p>Informacje przetwarzane w związku z Google API wykorzystujemy wyłącznie do obsługi opisanej funkcji komunikacyjnej i jej bezpieczeństwa. Nie sprzedajemy tych danych, nie wykorzystujemy ich do reklamy behawioralnej ani do trenowania modeli sztucznej inteligencji.</p>
+      <p>Korzystanie z danych otrzymanych za pośrednictwem Google API podlega <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, w tym wymaganiom Limited Use.</p>
+      <p>Osoba, która autoryzowała integrację, może cofnąć dostęp w <a href="https://myaccount.google.com/connections">ustawieniach połączeń swojego konta Google</a>. Cofnięcie dostępu zatrzymuje możliwość dalszego korzystania z integracji. Nie usuwa automatycznie wiadomości wysłanych wcześniej. O usunięcie danych znajdujących się po stronie Kaneel można wystąpić pod adresem <a href="mailto:kontakt@kaneel.pl">kontakt@kaneel.pl</a>.</p>
     </section>
 
     <section aria-labelledby="kalkulator">
@@ -154,9 +151,9 @@
       <h2 id="odbiorcy">6. Komu dane mogą być przekazywane</h2>
       <p>Dane mogą być przetwarzane przez osoby upoważnione do obsługi Kaneel oraz dostawców usług potrzebnych do utrzymania strony i prowadzenia korespondencji, w szczególności:</p>
       <ul>
-        <li>Vercel — w zakresie hostingu i bezpieczeństwa infrastruktury; obecna wersja formularza nie korzysta z funkcji serwerowej do wysyłania wiadomości;</li>
+        <li>Vercel — w zakresie hostingu, obsługi funkcji serwerowej formularza i bezpieczeństwa infrastruktury;</li>
         <li>dostawców usług pocztowych uczestniczących w dostarczeniu i przechowywaniu korespondencji;</li>
-        <li>Google — w zakresie integracji Gmail API po jej uruchomieniu oraz usług pocztowych, jeżeli uczestniczą w obsłudze danej korespondencji;</li>
+        <li>Google — w zakresie integracji Gmail API i obsługi wysyłanej korespondencji;</li>
         <li>podmioty uprawnione do otrzymania danych na podstawie przepisów prawa.</li>
       </ul>
       <p>Danych formularza nie udostępniamy publicznie.</p>
@@ -175,7 +172,7 @@
       <p>Jeśli korespondencja prowadzi do realizacji usługi, dane potrzebne do jej wykonania przechowujemy przez czas realizacji, a następnie w zakresie i przez okres wynikający z obowiązków prawnych lub potrzeby ustalenia, dochodzenia bądź obrony konkretnych roszczeń — do upływu właściwego terminu przedawnienia.</p>
       <p>Dane wprowadzane wyłącznie do lokalnego kalkulatora nie są archiwizowane przez Kaneel.</p>
       <p>Okres przechowywania danych technicznych zależy od używanej usługi hostingowej i jej ustawień retencji. Kryteriami przechowywania są obsługa żądań, zapewnienie bezpieczeństwa i wyjaśnianie incydentów, a w razie konkretnego sporu — potrzeba zabezpieczenia dowodów przez właściwy okres. Kod strony nie tworzy dodatkowej bazy logów ani archiwum danych formularza.</p>
-      <p>Po uruchomieniu integracji Google jej dane uwierzytelniające będą przechowywane przez czas korzystania z niej, a po jej wyłączeniu zostaną usunięte z konfiguracji serwerowej.</p>
+      <p>Na potrzeby ochrony formularza przed nadużyciami funkcja serwerowa przechowuje w pamięci instancji licznik prób powiązany ze skrótem identyfikatora połączenia, maksymalnie przez 10 minut. Surowy adres IP nie jest zapisywany w tym liczniku. Dane uwierzytelniające integracji Google są przechowywane przez czas korzystania z niej. Po jej wyłączeniu osoba zarządzająca serwisem powinna cofnąć dostęp i usunąć je z konfiguracji serwerowej.</p>
       <p>Dodanie tej polityki nie uruchamia automatycznego usuwania wiadomości ze skrzynki. Usuwanie korespondencji wymaga odrębnego działania osoby obsługującej pocztę lub ustawienia odpowiednich reguł u dostawcy poczty.</p>
     </section>
 
@@ -199,9 +196,9 @@
 
     <section aria-labelledby="bezpieczenstwo">
       <h2 id="bezpieczenstwo">10. Bezpieczeństwo</h2>
-      <p>Publiczny serwis jest udostępniany przez połączenie HTTPS. Obecna wersja strony jest statyczna: nie przechowuje danych formularza w bazie ani tokenów Gmail API. Formularz przekazuje przygotowaną wiadomość do wybranej przez Ciebie aplikacji pocztowej.</p>
+      <p>Publiczny serwis jest udostępniany przez połączenie HTTPS. Dane formularza trafiają do funkcji serwerowej wyłącznie w celu walidacji i wysłania wiadomości przez Gmail API. Aplikacja nie tworzy dodatkowej bazy danych zgłoszeń; korespondencja pozostaje u dostawców poczty.</p>
       <p>Dostęp do korespondencji powinien być ograniczony do osób upoważnionych. Wiadomości i dane uwierzytelniające nie powinny trafiać do publicznych plików strony ani repozytorium. Logi aplikacyjne nie powinny zawierać pełnej treści formularzy ani sekretów.</p>
-      <p>Po wdrożeniu planowanej integracji Gmail API jej dane uwierzytelniające będą pozostawały po stronie serwera. Zasady tej integracji opisano w punkcie 4.</p>
+      <p>Dane uwierzytelniające Gmail API pozostają po stronie serwera. Kod funkcji zapisuje w logach wyłącznie kategorie błędów i statusy techniczne, bez treści formularza, adresów e-mail i sekretów. Formularz stosuje walidację, kontrolę pochodzenia żądania i mechanizmy ograniczające nadużycia. Zasady integracji opisano w punkcie 4.</p>
     </section>
 
     <section aria-labelledby="zmiany">

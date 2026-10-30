@@ -58,24 +58,48 @@ if (contact) {
   const birth = contact.elements.birth;
   const today = new Date();
   birth.max = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-  contact.addEventListener('submit', event => {
+  let sending = false;
+  contact.addEventListener('submit', async event => {
     event.preventDefault();
-    if (!contact.reportValidity()) return;
+    if (sending || !contact.reportValidity()) return;
     const data = new FormData(contact);
-    const body = [
-      `Imię i nazwisko: ${data.get('name').trim()}`,
-      `E-mail: ${data.get('email').trim()}`,
-      `Data urodzenia: ${data.get('birth') || '-'}`,
-      `Wybrane usługi: ${data.getAll('services').join('; ') || '-'}`,
-      '', data.get('msg') || '',
-    ].join('\n');
-    const url = `mailto:${contact.dataset.email}?subject=${encodeURIComponent('Zamówienie analizy – Kaneel')}&body=${encodeURIComponent(body)}`;
-    const fallback = document.querySelector('#contact-fallback');
-    fallback.href = url;
-    fallback.hidden = false;
     const status = document.querySelector('#contact-status');
-    status.textContent = `Wiadomość jest przygotowana do otwarcia w aplikacji pocztowej. Wyślij ją z poczty. Jeśli aplikacja się nie otworzyła, skorzystaj z linku poniżej lub napisz na ${contact.dataset.email}.`;
+    const button = contact.querySelector('button[type="submit"]');
+    const label = button.innerHTML;
+    const controls = [...contact.elements].map(element => [element, element.disabled]);
+    sending = true;
+    contact.setAttribute('aria-busy', 'true');
+    controls.forEach(([element]) => { element.disabled = true; });
+    button.textContent = 'Wysyłanie…';
     status.hidden = false;
-    window.location.href = url;
+    status.setAttribute('aria-live', 'polite');
+    status.textContent = 'Wysyłanie wiadomości…';
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin', signal: AbortSignal.timeout(25000),
+        body: JSON.stringify({
+          name: data.get('name').trim(), email: data.get('email').trim(),
+          services: data.getAll('services'), birth: data.get('birth') || '',
+          msg: data.get('msg') || '', website: data.get('website') || '',
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok || result.ok !== true) {
+        status.setAttribute('aria-live', 'assertive');
+        status.textContent = typeof result.message === 'string' ? result.message : 'Nie udało się potwierdzić wysłania wiadomości. Dane pozostały w formularzu.';
+        return;
+      }
+      contact.reset();
+      status.textContent = 'Wiadomość została przyjęta do wysyłki. Dziękuję za kontakt.';
+    } catch {
+      status.setAttribute('aria-live', 'assertive');
+      status.textContent = 'Nie udało się potwierdzić wysłania z powodu błędu połączenia. Dane pozostały w formularzu. Wiadomość mogła zostać przyjęta — nie wysyłaj jej ponownie od razu. W razie potrzeby napisz na kontakt@kaneel.pl.';
+    } finally {
+      controls.forEach(([element, wasDisabled]) => { element.disabled = wasDisabled; });
+      button.innerHTML = label;
+      contact.removeAttribute('aria-busy');
+      sending = false;
+    }
   });
 }

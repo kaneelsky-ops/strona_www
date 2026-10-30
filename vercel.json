@@ -3,5 +3,10 @@
   "framework": null,
   "installCommand": "",
   "buildCommand": "node build-static.cjs",
-  "outputDirectory": "public"
+  "outputDirectory": "public",
+  "functions": {
+    "api/contact.js": {
+      "maxDuration": 30
+    }
+  }
 }

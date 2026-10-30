@@ -49,15 +49,16 @@ test('Contact disclosure links to the policy without adding a consent requiremen
   const form = read('index.html').match(/<form id="contact-form"[\s\S]*?<\/form>/)[0];
   assert.match(form, /Administratorem danych jest Alexandra Orin, prowadząca Kaneel/);
   assert.ok(form.includes(`<a href="${policyPath}">Polityce prywatności</a>`));
-  assert.match(form, /action="mailto:kontakt@kaneel.pl"/);
-  assert.match(form, /Formularz przygotuje wiadomość w Twojej aplikacji pocztowej/);
+  assert.match(form, /action="\/api\/contact" method="post"/);
+  assert.match(form, /Formularz wysyła wiadomość bezpośrednio do Kaneel przez Gmail API/);
   assert.equal((form.match(/type="checkbox"/g) || []).length, 6);
   assert.equal((form.match(/required=""/g) || []).length, 2);
 });
-test('Current mailto, optional fields, local calculator and future Gmail API are clearly distinguished', () => {
+test('Server-side Gmail delivery, optional fields and local calculator are clearly distinguished', () => {
   const html = read(policyPath);
-  assert.match(html, /Automatyczna wysyłka przez Gmail API nie jest obecnie uruchomiona/);
-  assert.match(html, /Planowana automatyczna wysyłka przez Gmail API/);
+  assert.match(html, /Automatyczna wysyłka przez Gmail API/);
+  assert.match(html, /Potwierdzenie pojawia się dopiero po przyjęciu wiadomości przez Gmail API/);
+  assert.doesNotMatch(html, /Planowana automatyczna|Formularz przygotowuje wiadomość w Twojej aplikacji/);
   assert.match(html, /https:\/\/www.googleapis.com\/auth\/gmail.send/);
   assert.match(html, /Wybór usług, data urodzenia i treść wiadomości są opcjonalne/);
   assert.match(html, /nie uruchamia automatycznego usuwania wiadomości ze skrzynki/);

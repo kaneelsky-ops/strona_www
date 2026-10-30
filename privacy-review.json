@@ -7,11 +7,11 @@
   "verifiedInProject": {
     "publicName": "Alexandra Orin",
     "contactEmail": "kontakt@kaneel.pl",
-    "contactMode": "mailto; użytkownik sam wysyła wiadomość w swojej aplikacji pocztowej",
+    "contactMode": "POST /api/contact; funkcja serwerowa wysyła wiadomość przez Gmail API; produkcyjna wysyłka wymaga ręcznego sprawdzenia po wdrożeniu",
     "requiredContactFields": ["imię i nazwisko", "e-mail"],
     "optionalContactFields": ["wybrane usługi", "data urodzenia", "wiadomość"],
     "calculator": "obliczenia lokalnie w przeglądarce, bez transmisji danych i trwałego zapisu przez kod strony",
-    "gmailApi": "brak aktywnej integracji; planowany wyłącznie zakres gmail.send",
+    "gmailApi": "zaimplementowana integracja serwerowa; wyłącznie gmail.send; testy automatyczne z zamockowanym Google",
     "hosting": "Vercel",
     "tracking": "brak cookies, localStorage, sessionStorage, IndexedDB, analityki i zewnętrznych skryptów w kodzie publikowanej aplikacji"
   },
@@ -21,10 +21,11 @@
     "Rzeczywiste usługi i ustawienia retencji logów, danych bezpieczeństwa oraz ewentualnych log drains na używanym koncie Vercel; w razie innych technologii trzeba dostosować politykę.",
     "Dostawca i warunki używanej skrzynki kontakt@kaneel.pl, w tym retencja, kopie zapasowe i podstawy ewentualnego przekazywania danych poza EOG; nie potwierdzono umów ani konkretnego mechanizmu transferu."
   ],
-  "onGmailApiActivation": [
-    "Zaktualizować punkt 4 oraz informację przy formularzu zgodnie z działającą integracją.",
-    "Zweryfikować wyłącznie gmail.send, przechowywanie tokenów po stronie serwera i brak pełnych treści formularzy lub sekretów w logach.",
-    "Wyświetlać potwierdzenie wysłania dopiero po rzeczywistym przyjęciu wiadomości przez usługę pocztową.",
+  "deploymentChecks": [
+    "Potwierdzić Root Directory jako główny folder repozytorium, Output Directory public oraz wdrożenie /api/contact jako Node.js Function.",
+    "Sprawdzić zakres gmail.send istniejącego refresh tokena, włączenie Gmail API i możliwość wysyłki z GMAIL_SENDER_EMAIL.",
+    "Wykonać jeden ręczny test rzeczywistej wysyłki po wdrożeniu i sprawdzić odbiór oraz Reply-To.",
+    "Rozważyć globalny limit w Vercel Firewall dla POST /api/contact; licznik w pamięci funkcji jest tylko lokalnym zabezpieczeniem instancji.",
     "Zaktualizować datę polityki przy publikacji zatwierdzonej wersji."
   ],
   "referenceUrls": [
