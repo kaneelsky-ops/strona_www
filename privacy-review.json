@@ -1,0 +1,37 @@
+{
+  "status": "local_preview_pending_owner_confirmation",
+  "reviewedAt": "2026-10-30",
+  "publicPath": "/polityka-prywatnosci.html",
+  "canonicalUrl": "https://www.kaneel.pl/polityka-prywatnosci.html",
+  "publishingDirectory": "public",
+  "verifiedInProject": {
+    "publicName": "Alexandra Orin",
+    "contactEmail": "kontakt@kaneel.pl",
+    "contactMode": "mailto; użytkownik sam wysyła wiadomość w swojej aplikacji pocztowej",
+    "requiredContactFields": ["imię i nazwisko", "e-mail"],
+    "optionalContactFields": ["wybrane usługi", "data urodzenia", "wiadomość"],
+    "calculator": "obliczenia lokalnie w przeglądarce, bez transmisji danych i trwałego zapisu przez kod strony",
+    "gmailApi": "brak aktywnej integracji; planowany wyłącznie zakres gmail.send",
+    "hosting": "Vercel",
+    "tracking": "brak cookies, localStorage, sessionStorage, IndexedDB, analityki i zewnętrznych skryptów w kodzie publikowanej aplikacji"
+  },
+  "ownerConfirmationsRequiredBeforePublication": [
+    "Czy Alexandra Orin jest pełną tożsamością administratora, czy pseudonimem; w razie pseudonimu należy podać rzeczywistą tożsamość administratora oraz właściwe dane kontaktowe.",
+    "Przyjęcie proponowanego limitu 12 miesięcy od ostatniej wiadomości dla zapytań bez zamówienia oraz ustalenie sposobu usuwania korespondencji; polityka nie uruchamia usuwania e-maili.",
+    "Rzeczywiste usługi i ustawienia retencji logów, danych bezpieczeństwa oraz ewentualnych log drains na używanym koncie Vercel; w razie innych technologii trzeba dostosować politykę.",
+    "Dostawca i warunki używanej skrzynki kontakt@kaneel.pl, w tym retencja, kopie zapasowe i podstawy ewentualnego przekazywania danych poza EOG; nie potwierdzono umów ani konkretnego mechanizmu transferu."
+  ],
+  "onGmailApiActivation": [
+    "Zaktualizować punkt 4 oraz informację przy formularzu zgodnie z działającą integracją.",
+    "Zweryfikować wyłącznie gmail.send, przechowywanie tokenów po stronie serwera i brak pełnych treści formularzy lub sekretów w logach.",
+    "Wyświetlać potwierdzenie wysłania dopiero po rzeczywistym przyjęciu wiadomości przez usługę pocztową.",
+    "Zaktualizować datę polityki przy publikacji zatwierdzonej wersji."
+  ],
+  "referenceUrls": [
+    "https://developers.google.com/workspace/gmail/api/auth/scopes",
+    "https://developers.google.com/terms/api-services-user-data-policy",
+    "https://policies.google.com/privacy/frameworks?hl=pl",
+    "https://vercel.com/legal/privacy-notice",
+    "https://uodo.gov.pl/"
+  ]
+}

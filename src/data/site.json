@@ -19,6 +19,12 @@
       "path": "/kacik-wiedzy",
       "title": "Kącik Wiedzy – Darmowe Podstawy i Nauka Numerologii | Kaneel",
       "description": "Chcesz poznać podstawy numerologii? Wejdź do Kącika Wiedzy w Kaneel i odkryj darmowe artykuły o wibracjach liczb, które pomogą Ci zrozumieć siebie."
+    },
+    {
+      "template": "privacy",
+      "path": "/polityka-prywatnosci.html",
+      "title": "Polityka prywatności Kaneel",
+      "description": "Informacje o administratorze danych, formularzu kontaktowym, kalkulatorze numerologicznym, prywatności i Twoich prawach w serwisie Kaneel."
     }
   ]
 }

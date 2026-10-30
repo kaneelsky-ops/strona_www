@@ -47,7 +47,9 @@ for (const page of config.pages) {
     return values[key];
   });
   values.CONTENT = fill(content);
-  const destination = path.join(output, page.path.slice(1), 'index.html');
+  const destination = page.path.endsWith('.html')
+    ? path.join(output, page.path.slice(1))
+    : path.join(output, page.path.slice(1), 'index.html');
   fs.mkdirSync(path.dirname(destination), { recursive: true });
   fs.writeFileSync(destination, fill(layout).replace(/[\t ]+$/gm, ''));
 }
