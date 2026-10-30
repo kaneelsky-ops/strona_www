@@ -147,6 +147,31 @@ test('Revoked refresh token or malformed OAuth response never reaches Gmail send
   }
 });
 
+test('Safe diagnostics distinguish OAuth client, refresh token, API availability and scope errors', async () => {
+  for (const reason of ['invalid_grant', 'invalid_client', 'invalid_scope']) {
+    const { handler, logs, calls } = setup([() => json({ error: reason, error_description: 'private-description fake-refresh-token visitor@example.net' }, 400)]);
+    const response = await invoke(handler);
+    assert.equal(response.body.code, 'GOOGLE_AUTH');assert.equal(calls.length, 1);
+    assert.deepEqual(logs, [{ event: 'contact_error', code: 'GOOGLE_AUTH', status: 503, stage: 'authorization', upstreamStatus: 400, reason }]);
+    assert.doesNotMatch(JSON.stringify({ logs, response: response.body }), /private-description|fake-refresh-token|visitor@example/);
+  }
+  for (const reason of ['SERVICE_DISABLED', 'ACCESS_TOKEN_SCOPE_INSUFFICIENT']) {
+    const { handler, logs } = setup([() => json({ access_token: 'fake-token' }), () => json({ error: { status: 'PERMISSION_DENIED', message: 'private Google details', details: [{ reason }] } }, 403)]);
+    await invoke(handler);
+    assert.deepEqual(logs, [{ event: 'contact_error', code: 'GOOGLE_AUTH', status: 503, stage: 'send', upstreamStatus: 403, reason }]);
+  }
+});
+
+test('Unexpected Google error content cannot leak into diagnostic logs or client responses', async () => {
+  const { handler, logs } = setup([() => json({ error: 'private-token-in-reason', error_description: 'private-token', errors: 'malformed' }, 400)]);
+  const response = await invoke(handler);
+  assert.equal(response.statusCode, 503);assert.equal(logs[0].reason, 'unclassified');
+  assert.doesNotMatch(JSON.stringify({ logs, response: response.body }), /private-token/);
+  const scoped = setup([() => json({ access_token: 'fake-token', scope: 'https://mail.google.com/' })]);
+  await invoke(scoped.handler);assert.equal(scoped.logs[0].reason, 'scope_not_send_only');
+  assert.doesNotMatch(JSON.stringify(scoped.logs), /mail.google.com|fake-token/);
+});
+
 test('A Gmail rejection or missing message id never produces success and never retries the send', async () => {
   for (const [reply, expected] of [
     [() => json({ error: {} }, 401), 503], [() => json({ error: {} }, 403), 503],

@@ -9,9 +9,29 @@ const GMAIL_SCOPE = 'https://www.googleapis.com/auth/gmail.send';
 const ALLOWED_FIELDS = new Set(['name', 'email', 'services', 'birth', 'msg', 'website']);
 
 class ContactError extends Error {
-  constructor(status, code, message) { super(message); this.status = status; this.code = code; }
+  constructor(status, code, message, diagnostic) { super(message); this.status = status; this.code = code; this.diagnostic = diagnostic; }
 }
 const invalid = message => new ContactError(400, 'INVALID_DATA', message);
+
+// Only predefined Google error identifiers may enter logs. Never log responses,
+// error descriptions, tokens, scopes, addresses, request bodies or raw exceptions.
+const GOOGLE_REASONS = new Set([
+  'invalid_grant', 'invalid_client', 'unauthorized_client', 'invalid_scope', 'access_denied',
+  'accessNotConfigured', 'SERVICE_DISABLED', 'API_DISABLED', 'CONSUMER_INVALID',
+  'ACCESS_TOKEN_SCOPE_INSUFFICIENT', 'insufficientPermissions', 'authError', 'domainPolicy',
+  'forbidden', 'PERMISSION_DENIED', 'UNAUTHENTICATED', 'badRequest', 'failedPrecondition',
+  'rateLimitExceeded', 'userRateLimitExceeded', 'dailyLimitExceeded',
+]);
+function googleReason(data) {
+  const error = data?.error;
+  const candidates = [
+    typeof error === 'string' ? error : undefined,
+    ...(Array.isArray(error?.errors) ? error.errors.map(item => item?.reason) : []),
+    ...(Array.isArray(error?.details) ? error.details.map(item => item?.reason) : []),
+    error?.status,
+  ];
+  return candidates.find(reason => GOOGLE_REASONS.has(reason)) || 'unclassified';
+}
 
 function singleEmail(value) {
   if (typeof value !== 'string' || value.length > 254 || /[\s\r\n]/.test(value)) return false;
@@ -144,12 +164,16 @@ function createContactHandler({ env = process.env, fetchImpl = globalThis.fetch,
     attempts.set(key, entry);
   }
   async function google(url, options, stage) {
+    let upstreamStatus;
+    let reason;
     try {
       const response = await fetchImpl(url, { ...options, signal: AbortSignal.timeout(googleTimeoutMs), redirect: 'error' });
+      upstreamStatus = response.status;
       // Keep the timeout active until the response body is read as well.
       const data = await response.json().catch(() => null);
       if (!response.ok) {
-        const reasons = data?.error?.errors?.map(item => item.reason) || [];
+        reason = googleReason(data);
+        const reasons = Array.isArray(data?.error?.errors) ? data.error.errors.map(item => item?.reason) : [];
         if (response.status === 429 || reasons.some(reason => ['rateLimitExceeded', 'userRateLimitExceeded', 'dailyLimitExceeded'].includes(reason))) {
           throw new ContactError(429, 'GOOGLE_LIMIT', 'Usługa pocztowa osiągnęła limit. Spróbuj ponownie później.');
         }
@@ -163,9 +187,10 @@ function createContactHandler({ env = process.env, fetchImpl = globalThis.fetch,
       }
       return data;
     } catch (error) {
-      if (error instanceof ContactError) throw error;
-      if (stage === 'send') throw new ContactError(504, 'DELIVERY_UNKNOWN', 'Nie udało się potwierdzić wysłania. Wiadomość mogła zostać przyjęta. Nie ponawiaj zgłoszenia od razu; w razie potrzeby napisz na kontakt@kaneel.pl.');
-      throw new ContactError(504, 'GOOGLE_TIMEOUT', 'Nie można teraz połączyć się z usługą pocztową. Dane pozostały w formularzu. Spróbuj później.');
+      const diagnostic = { stage, ...(upstreamStatus ? { upstreamStatus } : {}), reason: reason || (['AbortError', 'TimeoutError'].includes(error?.name) ? 'timeout' : 'connection_error') };
+      if (error instanceof ContactError) { error.diagnostic = diagnostic; throw error; }
+      if (stage === 'send') throw new ContactError(504, 'DELIVERY_UNKNOWN', 'Nie udało się potwierdzić wysłania. Wiadomość mogła zostać przyjęta. Nie ponawiaj zgłoszenia od razu; w razie potrzeby napisz na kontakt@kaneel.pl.', diagnostic);
+      throw new ContactError(504, 'GOOGLE_TIMEOUT', 'Nie można teraz połączyć się z usługą pocztową. Dane pozostały w formularzu. Spróbuj później.', diagnostic);
     }
   }
   return async function handler(request, response) {
@@ -188,8 +213,11 @@ function createContactHandler({ env = process.env, fetchImpl = globalThis.fetch,
         method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({ client_id: config.GOOGLE_CLIENT_ID, client_secret: config.GOOGLE_CLIENT_SECRET, refresh_token: config.GOOGLE_REFRESH_TOKEN, grant_type: 'refresh_token', scope: GMAIL_SCOPE }),
       }, 'authorization');
-      if (typeof token?.access_token !== 'string' || !token.access_token || (token.scope !== undefined && (typeof token.scope !== 'string' || token.scope.split(/\s+/).some(scope => scope !== GMAIL_SCOPE)))) {
-        throw new ContactError(503, 'GOOGLE_AUTH', 'Wysyłka jest chwilowo niedostępna. Napisz bezpośrednio na kontakt@kaneel.pl.');
+      if (typeof token?.access_token !== 'string' || !token.access_token) {
+        throw new ContactError(503, 'GOOGLE_AUTH', 'Wysyłka jest chwilowo niedostępna. Napisz bezpośrednio na kontakt@kaneel.pl.', { stage: 'authorization', reason: 'missing_access_token' });
+      }
+      if (token.scope !== undefined && (typeof token.scope !== 'string' || token.scope.split(/\s+/).some(scope => scope !== GMAIL_SCOPE))) {
+        throw new ContactError(503, 'GOOGLE_AUTH', 'Wysyłka jest chwilowo niedostępna. Napisz bezpośrednio na kontakt@kaneel.pl.', { stage: 'authorization', reason: 'scope_not_send_only' });
       }
       const sent = await google('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
         method: 'POST', headers: { Authorization: `Bearer ${token.access_token}`, 'Content-Type': 'application/json' },
@@ -202,7 +230,7 @@ function createContactHandler({ env = process.env, fetchImpl = globalThis.fetch,
       response.end(JSON.stringify({ ok: true, message: 'Wiadomość została przyjęta do wysyłki. Dziękuję za kontakt.' }));
     } catch (error) {
       const safe = error instanceof ContactError ? error : new ContactError(500, 'INTERNAL_ERROR', 'Wystąpił błąd formularza. Dane pozostały w formularzu. Spróbuj później.');
-      if (safe.status >= 500 || safe.code === 'GOOGLE_LIMIT') logger({ event: 'contact_error', code: safe.code, status: safe.status });
+      if (safe.status >= 500 || safe.code === 'GOOGLE_LIMIT') logger({ event: 'contact_error', code: safe.code, status: safe.status, ...safe.diagnostic });
       if (safe.status === 429) response.setHeader('Retry-After', String(safe.retryAfter || 60));
       response.statusCode = safe.status;
       response.end(JSON.stringify({ ok: false, code: safe.code, message: safe.message }));
