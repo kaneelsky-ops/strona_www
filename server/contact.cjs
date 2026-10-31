@@ -115,7 +115,7 @@ function allowedOrigin(origin, env) {
 function configuration(env) {
   const keys = ['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'GOOGLE_REFRESH_TOKEN', 'GMAIL_SENDER_EMAIL', 'CONTACT_TO_EMAIL'];
   if (keys.some(key => typeof env[key] !== 'string' || !env[key].trim()) || !singleEmail(env.GMAIL_SENDER_EMAIL) || !singleEmail(env.CONTACT_TO_EMAIL)) {
-    throw new ContactError(503, 'NOT_CONFIGURED', 'Formularz jest chwilowo niedostępny. Napisz bezpośrednio na kontakt@kaneel.pl.');
+    throw new ContactError(503, 'NOT_CONFIGURED', 'Formularz jest chwilowo niedostępny. Napisz bezpośrednio na kaneelsky@gmail.com.');
   }
   return Object.fromEntries(keys.map(key => [key, env[key]]));
 }
@@ -178,10 +178,10 @@ function createContactHandler({ env = process.env, fetchImpl = globalThis.fetch,
           throw new ContactError(429, 'GOOGLE_LIMIT', 'Usługa pocztowa osiągnęła limit. Spróbuj ponownie później.');
         }
         if (stage === 'authorization' || [401, 403].includes(response.status)) {
-          throw new ContactError(503, 'GOOGLE_AUTH', 'Wysyłka jest chwilowo niedostępna. Napisz bezpośrednio na kontakt@kaneel.pl.');
+          throw new ContactError(503, 'GOOGLE_AUTH', 'Wysyłka jest chwilowo niedostępna. Napisz bezpośrednio na kaneelsky@gmail.com.');
         }
         if (stage === 'send' && response.status >= 500) {
-          throw new ContactError(502, 'DELIVERY_UNKNOWN', 'Nie udało się potwierdzić wysłania. Wiadomość mogła zostać przyjęta. Nie ponawiaj zgłoszenia od razu; w razie potrzeby napisz na kontakt@kaneel.pl.');
+          throw new ContactError(502, 'DELIVERY_UNKNOWN', 'Nie udało się potwierdzić wysłania. Wiadomość mogła zostać przyjęta. Nie ponawiaj zgłoszenia od razu; w razie potrzeby napisz na kaneelsky@gmail.com.');
         }
         throw new ContactError(502, 'GOOGLE_ERROR', 'Usługa pocztowa odrzuciła zgłoszenie. Dane pozostały w formularzu. Spróbuj później.');
       }
@@ -189,7 +189,7 @@ function createContactHandler({ env = process.env, fetchImpl = globalThis.fetch,
     } catch (error) {
       const diagnostic = { stage, ...(upstreamStatus ? { upstreamStatus } : {}), reason: reason || (['AbortError', 'TimeoutError'].includes(error?.name) ? 'timeout' : 'connection_error') };
       if (error instanceof ContactError) { error.diagnostic = diagnostic; throw error; }
-      if (stage === 'send') throw new ContactError(504, 'DELIVERY_UNKNOWN', 'Nie udało się potwierdzić wysłania. Wiadomość mogła zostać przyjęta. Nie ponawiaj zgłoszenia od razu; w razie potrzeby napisz na kontakt@kaneel.pl.', diagnostic);
+      if (stage === 'send') throw new ContactError(504, 'DELIVERY_UNKNOWN', 'Nie udało się potwierdzić wysłania. Wiadomość mogła zostać przyjęta. Nie ponawiaj zgłoszenia od razu; w razie potrzeby napisz na kaneelsky@gmail.com.', diagnostic);
       throw new ContactError(504, 'GOOGLE_TIMEOUT', 'Nie można teraz połączyć się z usługą pocztową. Dane pozostały w formularzu. Spróbuj później.', diagnostic);
     }
   }
@@ -214,17 +214,17 @@ function createContactHandler({ env = process.env, fetchImpl = globalThis.fetch,
         body: new URLSearchParams({ client_id: config.GOOGLE_CLIENT_ID, client_secret: config.GOOGLE_CLIENT_SECRET, refresh_token: config.GOOGLE_REFRESH_TOKEN, grant_type: 'refresh_token', scope: GMAIL_SCOPE }),
       }, 'authorization');
       if (typeof token?.access_token !== 'string' || !token.access_token) {
-        throw new ContactError(503, 'GOOGLE_AUTH', 'Wysyłka jest chwilowo niedostępna. Napisz bezpośrednio na kontakt@kaneel.pl.', { stage: 'authorization', reason: 'missing_access_token' });
+        throw new ContactError(503, 'GOOGLE_AUTH', 'Wysyłka jest chwilowo niedostępna. Napisz bezpośrednio na kaneelsky@gmail.com.', { stage: 'authorization', reason: 'missing_access_token' });
       }
       if (token.scope !== undefined && (typeof token.scope !== 'string' || token.scope.split(/\s+/).some(scope => scope !== GMAIL_SCOPE))) {
-        throw new ContactError(503, 'GOOGLE_AUTH', 'Wysyłka jest chwilowo niedostępna. Napisz bezpośrednio na kontakt@kaneel.pl.', { stage: 'authorization', reason: 'scope_not_send_only' });
+        throw new ContactError(503, 'GOOGLE_AUTH', 'Wysyłka jest chwilowo niedostępna. Napisz bezpośrednio na kaneelsky@gmail.com.', { stage: 'authorization', reason: 'scope_not_send_only' });
       }
       const sent = await google('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
         method: 'POST', headers: { Authorization: `Bearer ${token.access_token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ raw: Buffer.from(mimeMessage(data, config, now()), 'utf8').toString('base64url') }),
       }, 'send');
       if (typeof sent?.id !== 'string' || !sent.id) {
-        throw new ContactError(502, 'DELIVERY_UNKNOWN', 'Nie udało się potwierdzić wysłania. Nie ponawiaj zgłoszenia od razu; w razie potrzeby napisz na kontakt@kaneel.pl.');
+        throw new ContactError(502, 'DELIVERY_UNKNOWN', 'Nie udało się potwierdzić wysłania. Nie ponawiaj zgłoszenia od razu; w razie potrzeby napisz na kaneelsky@gmail.com.');
       }
       response.statusCode = 200;
       response.end(JSON.stringify({ ok: true, message: 'Wiadomość została przyjęta do wysyłki. Dziękuję za kontakt.' }));

@@ -6,7 +6,7 @@
   "publishingDirectory": "public",
   "verifiedInProject": {
     "publicName": "Alexandra Orin",
-    "contactEmail": "kontakt@kaneel.pl",
+    "contactEmail": "kaneelsky@gmail.com",
     "contactMode": "POST /api/contact; funkcja serwerowa wysyła wiadomość przez Gmail API; produkcyjna wysyłka wymaga ręcznego sprawdzenia po wdrożeniu",
     "requiredContactFields": ["imię i nazwisko", "e-mail"],
     "optionalContactFields": ["wybrane usługi", "data urodzenia", "wiadomość"],
@@ -19,7 +19,7 @@
     "Czy Alexandra Orin jest pełną tożsamością administratora, czy pseudonimem; w razie pseudonimu należy podać rzeczywistą tożsamość administratora oraz właściwe dane kontaktowe.",
     "Przyjęcie proponowanego limitu 12 miesięcy od ostatniej wiadomości dla zapytań bez zamówienia oraz ustalenie sposobu usuwania korespondencji; polityka nie uruchamia usuwania e-maili.",
     "Rzeczywiste usługi i ustawienia retencji logów, danych bezpieczeństwa oraz ewentualnych log drains na używanym koncie Vercel; w razie innych technologii trzeba dostosować politykę.",
-    "Dostawca i warunki używanej skrzynki kontakt@kaneel.pl, w tym retencja, kopie zapasowe i podstawy ewentualnego przekazywania danych poza EOG; nie potwierdzono umów ani konkretnego mechanizmu transferu."
+    "Dostawca i warunki używanej skrzynki kaneelsky@gmail.com, w tym retencja, kopie zapasowe i podstawy ewentualnego przekazywania danych poza EOG; nie potwierdzono umów ani konkretnego mechanizmu transferu."
   ],
   "deploymentChecks": [
     "Potwierdzić Root Directory jako główny folder repozytorium, Output Directory public oraz wdrożenie /api/contact jako Node.js Function.",

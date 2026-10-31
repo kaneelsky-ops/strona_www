@@ -17,7 +17,7 @@ before(() => {
   }
   execFileSync(process.execPath, [path.join(preview, 'scripts/build-pages.cjs')], {
     cwd: preview,
-    env: { ...process.env, SITE_URL: 'https://www.kaneel.pl', CONTACT_EMAIL: 'kontakt@kaneel.pl' },
+    env: { ...process.env, SITE_URL: 'https://www.kaneel.pl', CONTACT_EMAIL: 'kaneelsky@gmail.com' },
   });
 });
 after(() => {

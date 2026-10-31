@@ -94,7 +94,7 @@ if (contact) {
       status.textContent = 'Wiadomość została przyjęta do wysyłki. Dziękuję za kontakt.';
     } catch {
       status.setAttribute('aria-live', 'assertive');
-      status.textContent = 'Nie udało się potwierdzić wysłania z powodu błędu połączenia. Dane pozostały w formularzu. Wiadomość mogła zostać przyjęta — nie wysyłaj jej ponownie od razu. W razie potrzeby napisz na kontakt@kaneel.pl.';
+      status.textContent = 'Nie udało się potwierdzić wysłania z powodu błędu połączenia. Dane pozostały w formularzu. Wiadomość mogła zostać przyjęta — nie wysyłaj jej ponownie od razu. W razie potrzeby napisz na kaneelsky@gmail.com.';
     } finally {
       controls.forEach(([element, wasDisabled]) => { element.disabled = wasDisabled; });
       button.innerHTML = label;
