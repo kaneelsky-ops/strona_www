@@ -5,27 +5,67 @@
   "pages": [
     {
       "template": "home",
+      "kind": "home",
+      "lang": "pl",
       "path": "/",
       "title": "Numerologia i Numerolog Online – Analizy Numerologiczne | KANEEL",
-      "description": "Numerologia (numerology) w KANEEL: portret numerologiczny, harmonizacja imienia i adresu, wybór dat, numerologia partnerska, dziecka i biznesowa. Każda analiza z 1-godzinną konsultacją online."
+      "description": "Numerologia (numerology) w KANEEL: portret numerologiczny, prognoza numerologiczna na rok, harmonizacja imienia i adresu, wybór dat, numerologia partnerska, dziecka i biznesowa. Z konsultacją online."
     },
     {
       "template": "calculator",
+      "kind": "calculator",
+      "lang": "pl",
       "path": "/kalkulator-numerologiczny",
       "title": "Darmowy Kalkulator Numerologiczny – Oblicz Swoją Liczbę | KANEEL",
       "description": "Darmowy kalkulator numerologiczny: wpisz imię, nazwisko lub nazwę firmy i poznaj liczbę nazwy, duszy i osobowości. System pitagorejski, obliczenia krok po kroku."
     },
     {
       "template": "knowledge",
+      "kind": "knowledge",
+      "lang": "pl",
       "path": "/kacik-wiedzy",
       "title": "Kącik Wiedzy – Darmowe Podstawy i Nauka Numerologii | KANEEL",
       "description": "Chcesz poznać podstawy numerologii? Wejdź do Kącika Wiedzy w KANEEL i odkryj darmowe artykuły o wibracjach liczb, które pomogą Ci zrozumieć siebie."
     },
     {
       "template": "privacy",
+      "kind": "privacy",
+      "lang": "pl",
       "path": "/polityka-prywatnosci.html",
       "title": "Polityka prywatności KANEEL",
       "description": "Informacje o administratorze danych, formularzu kontaktowym, kalkulatorze numerologicznym, prywatności i Twoich prawach w serwisie KANEEL."
+    },
+    {
+      "template": "en-home",
+      "kind": "home",
+      "lang": "en",
+      "path": "/en/",
+      "title": "Numerology Readings Online – Professional Numerologist | KANEEL",
+      "description": "Online numerology readings by numerologist Alexandra Orin: personal numerology chart, yearly forecast, name and address harmonization, compatibility, child and business numerology. 1-hour consultation included."
+    },
+    {
+      "template": "en-calculator",
+      "kind": "calculator",
+      "lang": "en",
+      "path": "/en/numerology-calculator",
+      "title": "Free Numerology Calculator – Name, Soul Urge & Personality Number | KANEEL",
+      "description": "Free numerology calculator: enter your full name or business name and discover your Expression, Soul Urge and Personality numbers. Pythagorean system, step-by-step results."
+    },
+    {
+      "template": "en-knowledge",
+      "kind": "knowledge",
+      "lang": "en",
+      "path": "/en/numerology-knowledge",
+      "title": "Numerology Knowledge Corner – Free Numerology Basics | KANEEL",
+      "description": "Learn the basics of numerology in the KANEEL Knowledge Corner: number vibrations, Life Path number, master and karmic numbers – free articles to help you understand yourself."
+    },
+    {
+      "template": "en-privacy",
+      "kind": "privacy",
+      "lang": "en",
+      "path": "/en/privacy-policy.html",
+      "title": "KANEEL Privacy Policy",
+      "description": "Information about the data controller, contact form, numerology calculator, privacy and your rights on the KANEEL website."
     }
   ]
 }

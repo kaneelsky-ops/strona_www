@@ -50,5 +50,57 @@
       "Czy kalkulator jest darmowy?",
       "Tak. Możesz go używać bez rejestracji i tyle razy, ile chcesz."
     ]
+  ],
+  "en-home": [
+    [
+      "What is numerology and how does it work?",
+      "Numerology is a profound system of self-discovery based on the idea that the numbers that accompany us from birth are not a coincidence. Every digit carries a specific energetic vibration that influences our character, predispositions and life challenges. By analysing your date of birth and full name, we create a precise psychological and spiritual map. It is a tool that helps you understand your motivations, find inner peace and make conscious decisions – while leaving you complete freedom to choose your own path."
+    ],
+    [
+      "How do I calculate my Life Path number?",
+      "Your Life Path number is the most important indicator in numerology – it shows your potential and the main purpose of this incarnation. To find it, add up all the digits of your date of birth (day, month and year) and reduce the sum to a single digit (from 1 to 9), unless the final result is a master number (11, 22 or 33), which is usually not reduced.\n\nExample: if you were born on 14.06.1986, you add 1+4 + 0+6 + 1+9+8+6 = 35, and then 3+5 = 8. Your Life Path number is 8."
+    ],
+    [
+      "What do master numbers 11, 22 and 33 mean in numerology?",
+      "Master numbers are vibrations with a much higher energetic and spiritual potential. In numerology these are above all 11, 22 and 33. People who have them in their numerology charts often face stronger life challenges, but they also have enormous potential for transformation, intuition and leadership. Master numbers do not mean a “better” destiny – they point to more intense work with energy and the need to find balance between matter and spirit."
+    ],
+    [
+      "What is a personal year in numerology and how does it affect my life?",
+      "Human life does not move in a straight line but in nine-year cycles. Your personal year shows what energy and challenges you will meet at a given time (from Year 1 – a new beginning, to Year 9 – closing the cycle and clearing space). To find out which personal year you are in, add the digits of the current calendar year to the day and month of your birth. Knowing this vibration lets you act in tune with your natural rhythm instead of swimming against the current. To learn what this vibration brings and what the year will be like for you, book your yearly numerology forecast."
+    ],
+    [
+      "Is numerology fortune telling?",
+      "No. Numerology is not idle fortune telling, nor does it impose ready-made scenarios. It is structured, psychological knowledge that works like a compass. Numbers do not determine your fate absolutely – they only show tendencies, cycles and potential you can draw on. You are fully in charge of how you live your life, and the knowledge you receive is there to support you in authentic self-discovery."
+    ],
+    [
+      "Why do you combine numerology, astrology and Human Design in your readings?",
+      "Because people are not one-dimensional. By combining these systems I create a multidimensional energetic portrait, so the answers to your questions are much deeper and more precise."
+    ],
+    [
+      "What do I receive with my numerology reading?",
+      "You receive a detailed analysis, beautifully prepared materials and an exclusive 1-hour online consultation included in the price, during which we can discuss all your thoughts and emotions. Readings are available in English and Polish."
+    ]
+  ],
+  "en-calculator": [
+    [
+      "How do I calculate the numerology number of my name?",
+      "Assign each letter a value from 1 to 9 according to the Pythagorean chart, add the values together and reduce the sum to a single digit. The calculator does it automatically and shows every step."
+    ],
+    [
+      "Does the calculator handle accented letters?",
+      "Yes. Accented letters such as á, é, ö, ñ or the Polish ą, ł, ż are counted as their plain Latin forms (a, e, o, n, a, l, z)."
+    ],
+    [
+      "What is the difference between the Soul Urge number and the Personality number?",
+      "The Soul Urge number comes from the vowels and describes your inner desires. The Personality number comes from the consonants (Y counts as a consonant) and describes what others see in you."
+    ],
+    [
+      "Can numerology predict the future?",
+      "No. It is a symbolic and interpretative practice – a starting point for reflection. It does not replace the advice of a doctor, psychologist or therapist."
+    ],
+    [
+      "Is the numerology calculator free?",
+      "Yes. You can use it without signing up, as many times as you like."
+    ]
   ]
 }

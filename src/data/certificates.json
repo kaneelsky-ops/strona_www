@@ -1,14 +1,26 @@
 {
   "01-dyplom-szkola-numerologii-akademia-numerologii-alexandra-orin.jpg": {
     "title": "Dyplom ukończenia Rocznej Szkoły Numerologii – Akademia Numerologii",
-    "alt": "Dyplom numerologa – ukończenie Rocznej Szkoły Numerologii w Akademii Numerologii, Alexandra Orin"
+    "alt": "Dyplom numerologa – ukończenie Rocznej Szkoły Numerologii w Akademii Numerologii, Alexandra Orin",
+    "en": {
+      "title": "Numerology School diploma – Numerology Academy",
+      "alt": "Numerologist diploma – one-year School of Numerology at the Numerology Academy, Alexandra Orin"
+    }
   },
   "02-dyplom-astrologia-warszawska-szkola-astrologii-alexandra-orin.jpg": {
     "title": "Dyplom kursu astrologii – Warszawska Szkoła Astrologii",
-    "alt": "Dyplom kursu astrologii Warszawskiej Szkoły Astrologii – Alexandra Orin, numerolog i astrolog"
+    "alt": "Dyplom kursu astrologii Warszawskiej Szkoły Astrologii – Alexandra Orin, numerolog i astrolog",
+    "en": {
+      "title": "Astrology course diploma – Warsaw School of Astrology",
+      "alt": "Astrology course diploma from the Warsaw School of Astrology – Alexandra Orin, numerologist and astrologer"
+    }
   },
   "03-certyfikat-uwalnianie-traum-z-ciala-amsterdam-alexandra-orin.jpg": {
     "title": "Certyfikat uwalniania traum z ciała – Amsterdam",
-    "alt": "Certyfikat szkolenia z uwalniania emocjonalnych i fizycznych traum z ciała w Amsterdamie – Alexandra Orin"
+    "alt": "Certyfikat szkolenia z uwalniania emocjonalnych i fizycznych traum z ciała w Amsterdamie – Alexandra Orin",
+    "en": {
+      "title": "Body trauma release certificate – Amsterdam",
+      "alt": "Certificate in emotional and physical trauma release from the body, Amsterdam – Alexandra Orin"
+    }
   }
 }

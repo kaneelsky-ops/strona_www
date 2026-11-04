@@ -15,6 +15,17 @@ export const meanings = {
   8: ['Realizator', 'Siła sprawcza, ambicja i umiejętność zarządzania zasobami.'],
   9: ['Humanista', 'Empatia, wielkoduszność i patrzenie szerzej niż na siebie.'],
 };
+export const meaningsEn = {
+  1: ['The Leader', 'Independence, initiative and the courage to take the first step.'],
+  2: ['The Diplomat', 'Sensitivity, cooperation and the gift of listening to others.'],
+  3: ['The Creator', 'Self-expression, lightness and the need to share your ideas.'],
+  4: ['The Builder', 'Reliability, order and patient pursuit of your goals.'],
+  5: ['The Explorer', 'Curiosity about the world, change and the need for freedom.'],
+  6: ['The Nurturer', 'Care, responsibility and looking after your loved ones.'],
+  7: ['The Seeker', 'Reflection, analysis and the need to understand deeper truths.'],
+  8: ['The Achiever', 'Personal power, ambition and the ability to manage resources.'],
+  9: ['The Humanitarian', 'Empathy, generosity and seeing beyond yourself.'],
+};
 export function normalizeName(value) {
   return value.toLowerCase().split('').map(char => polish[char] || char).join('')
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
