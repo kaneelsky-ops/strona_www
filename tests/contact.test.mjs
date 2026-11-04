@@ -63,7 +63,7 @@ test('All fields are delivered as UTF-8 MIME, with a fixed recipient, sender and
   assert.match(headers, /^From: sender@example.com\r\nTo: owner@example.com\r\nReply-To: visitor@example.net/m);
   assert.doesNotMatch(headers, /^(?:Cc|Bcc):/im);
   const subject = headers.match(/Subject: =\?UTF-8\?B\?([^?]+)\?=/)[1];
-  assert.equal(Buffer.from(subject, 'base64').toString('utf8'), 'Nowe zgłoszenie z formularza Kaneel');
+  assert.equal(Buffer.from(subject, 'base64').toString('utf8'), 'Nowe zgłoszenie z formularza KANEEL');
   const text = Buffer.from(encodedBody, 'base64').toString('utf8');
   for (const value of ['Żaneta Łucja', 'visitor@example.net', services[0], services[4], '1990-05-12', 'Pytanie o relacje & pracę.']) assert.ok(text.includes(value), value);
   assert.doesNotMatch(JSON.stringify(response.body), /fake-access|fake-refresh|fake-client/);

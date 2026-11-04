@@ -47,6 +47,21 @@ for (const link of document.querySelectorAll('a[href]')) {
   }
 }
 
+const certificateDialog = document.querySelector('.certificate-dialog');
+if (certificateDialog?.showModal) {
+  const preview = certificateDialog.querySelector('img');
+  for (const link of document.querySelectorAll('[data-certificate]')) {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      const image = link.querySelector('img');
+      preview.src = link.href;
+      preview.alt = image.alt;
+      certificateDialog.showModal();
+    });
+  }
+  certificateDialog.addEventListener('click', event => { if (event.target === certificateDialog) certificateDialog.close(); });
+}
+
 const contact = document.querySelector('#contact-form');
 if (contact) {
   for (const link of document.querySelectorAll('[data-service]')) {

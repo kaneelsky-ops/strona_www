@@ -33,7 +33,7 @@ test('Policy is a real .html file, with Polish metadata and all eleven sections 
   const html = read(policyPath);
   assert.ok(fs.statSync(path.join(preview, 'public', policyPath)).isFile());
   assert.match(html, /<html lang="pl"/);
-  assert.match(html, /<title>Polityka prywatności Kaneel<\/title>/);
+  assert.match(html, /<title>Polityka prywatności KANEEL<\/title>/);
   assert.match(html, /<link rel="canonical" href="https:\/\/www\.kaneel\.pl\/polityka-prywatnosci\.html">/);
   assert.equal((html.match(/<h2 id=/g) || []).length, 11);
   assert.match(html, /Wróć do strony głównej/);
@@ -47,11 +47,11 @@ test('Every page has a regular policy link in the shared footer', () => {
 });
 test('Contact disclosure links to the policy without adding a consent requirement', () => {
   const form = read('index.html').match(/<form id="contact-form"[\s\S]*?<\/form>/)[0];
-  assert.match(form, /Administratorem danych jest Alexandra Orin, prowadząca Kaneel/);
+  assert.match(form, /Administratorem danych jest Alexandra Orin, prowadząca KANEEL/);
   assert.ok(form.includes(`<a href="${policyPath}">Polityce prywatności</a>`));
   assert.match(form, /action="\/api\/contact" method="post"/);
-  assert.match(form, /Formularz wysyła wiadomość bezpośrednio do Kaneel przez Gmail API/);
-  assert.equal((form.match(/type="checkbox"/g) || []).length, 6);
+  assert.match(form, /Formularz wysyła wiadomość bezpośrednio do KANEEL przez Gmail API/);
+  assert.equal((form.match(/type="checkbox"/g) || []).length, JSON.parse(fs.readFileSync(path.join(project, 'src/data/services.json'), 'utf8')).length);
   assert.equal((form.match(/required=""/g) || []).length, 2);
 });
 test('Server-side Gmail delivery, optional fields and local calculator are clearly distinguished', () => {

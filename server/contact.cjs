@@ -122,14 +122,14 @@ function configuration(env) {
 
 function mimeMessage(data, config, now) {
   const body = [
-    'Nowe zgłoszenie z formularza Kaneel', '',
+    'Nowe zgłoszenie z formularza KANEEL', '',
     `Imię i nazwisko: ${data.name}`, `E-mail: ${data.email}`,
     `Wybrane usługi: ${data.services.join('; ') || 'Nie wybrano'}`,
     `Data urodzenia: ${data.birth || 'Nie podano'}`, '',
     'Wiadomość:', data.msg || 'Nie podano treści wiadomości.',
   ].join('\r\n');
   const content = Buffer.from(body, 'utf8').toString('base64').match(/.{1,76}/g).join('\r\n');
-  const encodedSubject = Buffer.from('Nowe zgłoszenie z formularza Kaneel', 'utf8').toString('base64');
+  const encodedSubject = Buffer.from('Nowe zgłoszenie z formularza KANEEL', 'utf8').toString('base64');
   return [
     `From: ${config.GMAIL_SENDER_EMAIL}`, `To: ${config.CONTACT_TO_EMAIL}`,
     `Reply-To: ${data.email}`, `Subject: =?UTF-8?B?${encodedSubject}?=`,
@@ -202,7 +202,7 @@ function createContactHandler({ env = process.env, fetchImpl = globalThis.fetch,
         response.setHeader('Allow', 'POST');
         throw new ContactError(405, 'METHOD_NOT_ALLOWED', 'Użyj formularza kontaktowego.');
       }
-      if (!allowedOrigin(request.headers.origin, env)) throw new ContactError(403, 'ORIGIN_NOT_ALLOWED', 'Wyślij zgłoszenie z formularza na stronie Kaneel.');
+      if (!allowedOrigin(request.headers.origin, env)) throw new ContactError(403, 'ORIGIN_NOT_ALLOWED', 'Wyślij zgłoszenie z formularza na stronie KANEEL.');
       if (!/^application\/json(?:\s*;|$)/i.test(request.headers['content-type'] || '') || !['identity', undefined].includes(request.headers['content-encoding'])) {
         throw new ContactError(415, 'UNSUPPORTED_MEDIA_TYPE', 'Formularz wymaga danych w formacie JSON.');
       }

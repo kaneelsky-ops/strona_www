@@ -1,30 +1,31 @@
 {
   "siteUrl": "https://www.kaneel.pl",
   "contactEmail": "kaneelsky@gmail.com",
+  "instagramUrl": "https://www.instagram.com/orrinkaone/",
   "pages": [
     {
       "template": "home",
       "path": "/",
-      "title": "Kaneel – Numerolog, Astrologia i Human Design | Odkryj Siebie",
-      "description": "Szukasz głębokiego zrozumienia? W Kaneel znajdziesz bezpieczną przestrzeń, ciepłe otulenie i holistyczną analizę numerologiczną. Odkryj swoją drogę życia!"
+      "title": "Numerologia i Numerolog Online – Analizy Numerologiczne | KANEEL",
+      "description": "Numerologia (numerology) w KANEEL: portret numerologiczny, harmonizacja imienia i adresu, wybór dat, numerologia partnerska, dziecka i biznesowa. Każda analiza z 1-godzinną konsultacją online."
     },
     {
       "template": "calculator",
       "path": "/kalkulator-numerologiczny",
-      "title": "Darmowy Kalkulator Numerologiczny – Oblicz Swoją Liczbę | Kaneel",
+      "title": "Darmowy Kalkulator Numerologiczny – Oblicz Swoją Liczbę | KANEEL",
       "description": "Darmowy kalkulator numerologiczny: wpisz imię, nazwisko lub nazwę firmy i poznaj liczbę nazwy, duszy i osobowości. System pitagorejski, obliczenia krok po kroku."
     },
     {
       "template": "knowledge",
       "path": "/kacik-wiedzy",
-      "title": "Kącik Wiedzy – Darmowe Podstawy i Nauka Numerologii | Kaneel",
-      "description": "Chcesz poznać podstawy numerologii? Wejdź do Kącika Wiedzy w Kaneel i odkryj darmowe artykuły o wibracjach liczb, które pomogą Ci zrozumieć siebie."
+      "title": "Kącik Wiedzy – Darmowe Podstawy i Nauka Numerologii | KANEEL",
+      "description": "Chcesz poznać podstawy numerologii? Wejdź do Kącika Wiedzy w KANEEL i odkryj darmowe artykuły o wibracjach liczb, które pomogą Ci zrozumieć siebie."
     },
     {
       "template": "privacy",
       "path": "/polityka-prywatnosci.html",
-      "title": "Polityka prywatności Kaneel",
-      "description": "Informacje o administratorze danych, formularzu kontaktowym, kalkulatorze numerologicznym, prywatności i Twoich prawach w serwisie Kaneel."
+      "title": "Polityka prywatności KANEEL",
+      "description": "Informacje o administratorze danych, formularzu kontaktowym, kalkulatorze numerologicznym, prywatności i Twoich prawach w serwisie KANEEL."
     }
   ]
 }
