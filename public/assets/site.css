@@ -49,7 +49,10 @@ button, summary { cursor: pointer; }
 .menu-open .site-head .menu-toggle { color: var(--kaneel-ink); }
 .skip-link { position: absolute; top: -100px; left: 20px; z-index: 60; background: var(--kaneel-cinnamon); color: var(--kaneel-cream); padding: 12px 20px; border-radius: 30px; }
 .skip-link:focus { top: 16px; }
-.about-photo { width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; }
+.about-photo { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.hero-photo { object-position: 50% 50%; }
+.offer-photo-portrait { object-position: 66% 55%; }
+.offer-photo-year { object-position: 30% 55%; }
 .intro-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-copy > .mt-10 { flex-wrap: wrap; }
 .hero-copy > .mt-10 a:first-child { max-width: 100%; text-align: center; }
