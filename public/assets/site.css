@@ -191,6 +191,19 @@ textarea.contact-input { resize: vertical; }
 .privacy-return { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--kaneel-line); }
 .privacy-simple-nav { display: flex; gap: 12px 22px; flex-wrap: wrap; padding-block: 24px 0; font-size: .85rem; }
 /* Hero – centred tagline with "Rozgość się" and arrow below (same type as "numerologia"). */
+/* Hero: title block lowered by the height of the KANEEL letters and set over the centre of the wood grain */
+.hero-title { --hero-mark: clamp(3.4rem, min(15vw, 22svh), 13rem); padding-top: calc(24svh + var(--hero-mark) * .72); }
+@media (min-width: 768px) { .hero-title { padding-top: calc(17svh + var(--hero-mark) * .72); } }
+.hero-mark { text-shadow: 0 2px 34px #140c0973; }
+.hero-sub { display: flex; align-items: center; justify-content: center; gap: 1.1rem; color: var(--kaneel-cream); font-weight: 600; text-shadow: 0 1px 2px #140c09b3, 0 0 18px #140c0999; }
+.hero-sub-word { padding-left: .5em; }
+.hero-sub-line { width: 2.4rem; height: 1px; background: linear-gradient(to right, transparent, #ede6dcb3); }
+.hero-sub-line:last-child { background: linear-gradient(to left, transparent, #ede6dcb3); }
+.hero-veil { background-image: radial-gradient(ellipse 60% 42% at 50% 44%, #140c0966 0, #140c0926 55%, transparent 100%), linear-gradient(to bottom, #2b1b1573 0, #2b1b150d 45%, #2b1b158c 100%); }
+.hero-wood { object-position: 67% 50%; animation: hero-settle 2.6s cubic-bezier(.2,.7,.2,1) both; }
+@media (max-width: 767px) and (orientation: portrait) { .hero-wood { object-position: 50% 52%; } }
+@keyframes hero-settle { from { transform: scale(1.07); filter: brightness(.7); } to { transform: none; filter: none; } }
+@media (prefers-reduced-motion: reduce) { .hero-wood { animation: none; } }
 .hero-bottom { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0 24px 32px; text-align: center; color: #ede6dcd9; }
 .hero-tagline, .hero-scroll span { padding-left: .5em; font: 500 .7rem/1.7 var(--sans); letter-spacing: .5em; text-transform: uppercase; }
 .hero-tagline { max-width: 40rem; color: #ede6dce6; text-wrap: balance; }
