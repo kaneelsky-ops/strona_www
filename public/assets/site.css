@@ -50,9 +50,17 @@ button, summary { cursor: pointer; }
 .skip-link { position: absolute; top: -100px; left: 20px; z-index: 60; background: var(--kaneel-cinnamon); color: var(--kaneel-cream); padding: 12px 20px; border-radius: 30px; }
 .skip-link:focus { top: 16px; }
 .about-photo { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
-.hero-photo { object-position: 50% 50%; }
+/* Hero photo: sits in the lower part of the hero and rises out of the dark wood tone, so the title rests on a calm, dark sky */
+.hero-photo { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 76%; object-fit: cover; object-position: 50% 38%; color: transparent;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 34%); mask-image: linear-gradient(to bottom, transparent 0, #000 34%); }
+@media (max-width: 767px) { .hero-photo { height: 70%; object-position: 34% 30%; } }
+@media (min-width: 768px) {
+  .hero-photo { height: 74%; object-position: 50% 14%; }
+  .hero-photo ~ .fade-in { padding-top: 12svh; }
+}
+.hero-photo ~ .hero-bottom { padding-top: 56px; background: linear-gradient(to top, #2b1b15d9 0, #2b1b1599 55%, transparent 100%); }
 .offer-photo-portrait { object-position: 66% 55%; }
-.offer-photo-year { object-position: 30% 55%; }
+.offer-photo-year { object-position: 55% 50%; }
 .intro-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-copy > .mt-10 { flex-wrap: wrap; }
 .hero-copy > .mt-10 a:first-child { max-width: 100%; text-align: center; }
