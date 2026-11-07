@@ -82,6 +82,12 @@ if (contact) {
       if (checkbox) checkbox.checked = true;
     });
   }
+  // Links from the offer page (/oferta) arrive as /?usluga=<service>#kontakt and preselect that service.
+  const requested = new URLSearchParams(location.search).get('usluga');
+  if (requested) {
+    const checkbox = [...contact.querySelectorAll('[name="services"]')].find(input => input.value === requested);
+    if (checkbox) checkbox.checked = true;
+  }
   const birth = contact.elements.birth;
   const today = new Date();
   birth.max = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;

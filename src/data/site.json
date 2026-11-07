@@ -12,6 +12,14 @@
       "description": "Numerologia (numerology) w KANEEL: portret numerologiczny, prognoza numerologiczna na rok, harmonizacja imienia i adresu, wybór dat, numerologia partnerska, dziecka i biznesowa. Z konsultacją online."
     },
     {
+      "template": "offer",
+      "kind": "offer",
+      "lang": "pl",
+      "path": "/oferta",
+      "title": "Oferta i Cennik – Analizy Numerologiczne Online | KANEEL",
+      "description": "Oferta i ceny KANEEL: portret numerologiczny, prognoza na 12 miesięcy, harmonizacja imienia i nazwiska, dobór imienia, ustawienie podpisu, harmonizacja adresu, numerologia partnerska, dziecka, biznesowa i vouchery prezentowe."
+    },
+    {
       "template": "calculator",
       "kind": "calculator",
       "lang": "pl",
@@ -42,6 +50,14 @@
       "path": "/en/",
       "title": "Numerology Readings Online – Professional Numerologist | KANEEL",
       "description": "Online numerology readings by numerologist Alexandra Orin: personal numerology chart, yearly forecast, name and address harmonization, compatibility, child and business numerology. 1-hour consultation included."
+    },
+    {
+      "template": "en-offer",
+      "kind": "offer",
+      "lang": "en",
+      "path": "/en/numerology-readings",
+      "title": "Numerology Readings and Prices – Online Consultations | KANEEL",
+      "description": "KANEEL readings and prices: personal numerology chart, 12-month forecast, name harmonization, name choice, signature alignment, address harmonization, compatibility, child and business numerology, and gift vouchers."
     },
     {
       "template": "en-calculator",

@@ -7,6 +7,7 @@ const faqs = require('../src/data/faq.json');
 const output = path.join(project, 'public');
 const services = { pl: require('../src/data/services.json'), en: require('../src/data/services-en.json') };
 const certificateMeta = require('../src/data/certificates.json');
+const prices = require('../src/data/prices.json');
 const instagram = config.instagramUrl;
 const layout = fs.readFileSync(path.join(project, 'src/layout.html'), 'utf8');
 const escape = value => String(value).replace(/[&<>"']/g, char => ({
@@ -127,6 +128,15 @@ function structuredData(page) {
       })),
     },
   });
+  if (page.kind === 'offer') graph.push({
+    '@type': 'OfferCatalog', name: en ? 'KANEEL numerology readings and prices' : 'KANEEL – oferta i cennik analiz numerologicznych',
+    url: site + page.path, inLanguage: page.lang,
+    itemListElement: services.pl.map((value, index) => ({ value, name: services[page.lang][index] }))
+      .filter(({ value }) => prices[page.lang][value]).map(({ value, name }) => ({
+        '@type': 'Offer', price: prices[page.lang][value].replace(/[^\d.]/g, ''), priceCurrency: en ? 'EUR' : 'PLN',
+        itemOffered: { '@type': 'Service', name, provider: { '@type': 'Person', name: 'Alexandra Orin' } },
+      })),
+  });
   if (page.kind === 'calculator') graph.push({
     '@type': 'WebApplication', name: en ? 'Numerology name calculator' : 'Kalkulator numerologiczny nazwy', url: site + page.path,
     applicationCategory: 'LifestyleApplication', operatingSystem: 'Any', inLanguage: page.lang,
@@ -150,7 +160,7 @@ for (const page of config.pages) {
     ...Object.fromEntries(Object.entries(t).filter(([key]) => key.startsWith('T_'))),
     LANG: page.lang, OG_LOCALE: t.ogLocale, OG_LOCALE_ALT: other ? ui[other.lang].ogLocale : t.ogLocale,
     HREFLANG: hreflang(page), LANG_SWITCH: langSwitch(page),
-    HOME: links.home, CALC: links.calculator, KNOW: links.knowledge, PRIVACY: links.privacy,
+    HOME: links.home, OFFER: links.offer, CALC: links.calculator, KNOW: links.knowledge, PRIVACY: links.privacy,
     TITLE: escape(page.title), DESCRIPTION: escape(page.description),
     CANONICAL: escape(site + page.path), SITE_URL: escape(site),
     CONTACT_EMAIL: escape(email), INSTAGRAM_LINK: instagramLink(page.lang), EMAIL_LINK: emailLink(page.lang),

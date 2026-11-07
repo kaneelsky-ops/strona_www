@@ -16,7 +16,7 @@ const text = english ? {
   harmonyTitle: kinds => `Your name contains ${kinds}.`,
   kinds: { master: 'a master number', karmic: 'a karmic number', both: 'master and karmic numbers' },
   harmonyText: found => `Found: ${found}. These are especially intense vibrations that can bring strong lessons and tension between different areas of life. I encourage you to harmonize your energy – a numerology name harmonization (or a harmonious pen name) can help it flow in one direction.`,
-  harmonyLink: 'See name harmonization', harmonyHref: '/en/#name-harmonization',
+  harmonyLink: 'See name harmonization', harmonyHref: '/en/numerology-readings#name-harmonization',
   labels: { all: 'Expression', soul: 'Soul Urge', personality: 'Personality' },
 } : {
   master: 'Liczba mistrzowska', karmic: 'Liczba karmiczna', nameNumber: 'Twoja liczba nazwy',
@@ -33,7 +33,7 @@ const text = english ? {
   harmonyTitle: kinds => `W Twoim imieniu i nazwisku pojawia się ${kinds}.`,
   kinds: { master: 'liczba mistrzowska', karmic: 'liczba karmiczna', both: 'liczba mistrzowska i karmiczna' },
   harmonyText: found => `Wynik: ${found}. To wibracje o szczególnie silnej energii, które mogą przynosić intensywne lekcje i napięcia między różnymi sferami życia. Zachęcam Cię do zharmonizowania swojej energii – harmonizacja imienia i nazwiska (lub harmonijny pseudonim) pomoże jej płynąć w jednym kierunku.`,
-  harmonyLink: 'Zobacz harmonizację imion i nazwisk', harmonyHref: '/#harmonizacja-imienia',
+  harmonyLink: 'Zobacz harmonizację imion i nazwisk', harmonyHref: '/oferta#harmonizacja-imienia',
   labels: { all: 'liczba nazwy', soul: 'liczba duszy', personality: 'liczba osobowości' },
 };
 const meaningList = english ? meaningsEn : meanings;

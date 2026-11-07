@@ -40,7 +40,7 @@ test('Policy is a real .html file, with Polish metadata and all eleven sections 
   assert.doesNotMatch(html, /\{\{[A-Z_]+\}\}|\[Przed publikacją|\[wstaw|DO UZUPEŁNIENIA/);
 });
 test('Every page has a regular policy link in the shared footer', () => {
-  for (const file of ['index.html', 'kalkulator-numerologiczny/index.html', 'kacik-wiedzy/index.html', policyPath]) {
+  for (const file of ['index.html', 'oferta/index.html', 'kalkulator-numerologiczny/index.html', 'kacik-wiedzy/index.html', policyPath]) {
     const footer = read(file).match(/<footer[\s\S]*?<\/footer>/)[0];
     assert.ok(footer.includes(`<a href="${policyPath}">Polityka prywatności</a>`), file);
   }
