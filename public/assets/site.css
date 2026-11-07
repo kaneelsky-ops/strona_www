@@ -244,6 +244,42 @@ textarea.contact-input { resize: vertical; }
   .offer-tile-image, .offer-tile-featured .offer-tile-image { min-height: 0; aspect-ratio: 4/3; }
   .offer-tile-body, .offer-tile-featured .offer-tile-body { padding: 26px 22px 24px; }
 }
+/* Offer: "read more", prices, gift voucher */
+.offer-more { width: 100%; margin-top: 16px; }
+.offer-more summary { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; list-style: none; font-size: .85rem; font-weight: 500; color: var(--kaneel-cinnamon); }
+.offer-more summary::-webkit-details-marker { display: none; }
+.offer-more summary:hover { color: var(--kaneel-ink); }
+.offer-more-plus { font: 300 1.1rem/1 var(--sans); transition: transform .2s; }
+.offer-more[open] .offer-more-plus { transform: rotate(45deg); }
+.offer-more-body { margin-top: 12px; color: var(--kaneel-ink-soft); font-size: .92rem; line-height: 1.8; }
+.offer-more-body > * + * { margin-top: 10px; }
+.offer-more-body ul, .voucher-options { padding-left: 1.2em; }
+.offer-more-body ul { list-style: disc; }
+.offer-more-body li + li, .voucher-options li + li { margin-top: 6px; }
+.offer-tile .offer-price { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; width: 100%; margin-top: 14px; font-size: .8rem; color: var(--kaneel-ink-soft); }
+.offer-tile .offer-price strong { font: 400 1.35rem/1.2 var(--serif); color: var(--kaneel-ink); white-space: nowrap; }
+.offer-tile .offer-price-extra { margin-top: 6px; }
+.offer-tile .offer-price-extra strong { font-size: 1.1rem; }
+.offer-tile-body > :not(.consultation-note):not(.offer-price) + .offer-price { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--kaneel-line); }
+.offer-tile-body > p:not(.offer-kicker):not(.consultation-note):not(.offer-price) + .offer-price,
+.offer-tile-body > details + .offer-price { margin-top: 24px; }
+.offer-tile-body > details + .consultation-note { margin-top: 24px; }
+.offer-tile-voucher { grid-column: 1 / -1; background: var(--kaneel-sand); }
+.offer-tile-voucher .offer-tile-body { padding: 48px 6% 44px; }
+.offer-tile-voucher h3 { font-size: clamp(1.9rem, 2.8vw, 2.4rem); line-height: 1.15; max-width: 46rem; }
+.offer-tile-voucher .offer-tile-body > p:not(.offer-kicker) { max-width: 46rem; font-size: 1rem; }
+.voucher-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; width: 100%; margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--kaneel-line); color: var(--kaneel-ink-soft); font-size: .95rem; line-height: 1.8; }
+.voucher-columns h4 { margin-bottom: 8px; font: 400 1.35rem/1.25 var(--serif); color: var(--kaneel-ink); }
+.voucher-options { list-style: decimal; margin-top: 12px; }
+.voucher-options strong, .voucher-method h5 { color: var(--kaneel-ink); font-weight: 500; }
+.voucher-methods { margin-top: 12px; }
+.voucher-method { padding: 16px 0; border-top: 1px solid var(--kaneel-line); }
+.voucher-method:first-child { border-top: 0; padding-top: 4px; }
+.voucher-method h5 { font-size: .95rem; margin-bottom: 4px; }
+.voucher-method .offer-price { margin-top: 8px; }
+.offer-tile-voucher .text-link { margin-top: 28px; }
+@media (max-width: 767px) { .voucher-columns { grid-template-columns: 1fr; gap: 28px; } }
+@media (max-width: 639px) { .offer-tile-voucher .offer-tile-body { padding: 26px 22px 24px; } }
 /* FAQ headings inside the accordion */
 .faq-item summary h3 { font: inherit; margin: 0; }
 .faq-answer > p + p { margin-top: 14px; }
