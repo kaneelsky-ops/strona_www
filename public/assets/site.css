@@ -393,3 +393,9 @@ textarea.contact-input { resize: vertical; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 .nowrap { white-space: nowrap; }
+/* Offer page: text-only tiles, the flagship reading spans the full row */
+.offer-tile-wide { grid-column: 1 / -1; }
+.offer-tile-wide .offer-tile-body { padding: 40px 6% 36px; }
+.offer-tile-wide h3 { font-size: clamp(1.9rem, 2.8vw, 2.4rem); line-height: 1.15; }
+.offer-tile-wide .offer-tile-body > p:not(.offer-kicker):not(.consultation-note):not(.offer-price) { max-width: 46rem; font-size: 1rem; }
+@media (max-width: 639px) { .offer-tile-wide .offer-tile-body { padding: 26px 22px 24px; } }
