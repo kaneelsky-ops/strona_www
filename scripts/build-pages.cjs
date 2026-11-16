@@ -94,7 +94,7 @@ ${items.map(item => `<li><a class="certificate-thumb" href="${escape(item.src)}"
 </div>
 <dialog class="certificate-dialog" aria-label="${t.certDialog}"><form method="dialog"><button class="certificate-close" type="submit" aria-label="${t.certClose}">×</button></form><img alt=""></dialog>`;
 };
-const instagramLink = lang => `<a class="icon-link instagram-link" href="${escape(instagram)}" target="_blank" rel="noopener me" aria-label="${ui[lang].instagramLabel}">${instagramIcon}<span>@orrinkaone</span></a>`;
+const instagramLink = lang => `<a class="icon-link instagram-link" href="${escape(instagram)}" target="_blank" rel="noopener me" aria-label="${ui[lang].instagramLabel}">${instagramIcon}<span>@kaneel__</span></a>`;
 const emailLink = lang => `<a class="icon-link email-link" href="mailto:${escape(email)}" aria-label="${ui[lang].emailLabel}: ${escape(email)}">${mailIcon}<span>${escape(email)}</span></a>`;
 const langSwitch = page => `<nav class="lang-switch" aria-label="${ui[page.lang].langSwitch}">${alternatesFor(page).map(other =>
   `<a href="${escape(other.path)}" hreflang="${other.lang}" lang="${other.lang}"${other.lang === page.lang ? ' aria-current="true"' : ''}>${other.lang.toUpperCase()}</a>`).join('<span aria-hidden="true">/</span>')}</nav>`;
@@ -116,7 +116,7 @@ function structuredData(page) {
       : 'Numerologia (numerology), astrologia i Human Design – indywidualne analizy numerologiczne z 1-godzinną konsultacją online.',
     areaServed: 'Worldwide', availableLanguage: ['pl', 'en'],
     knowsAbout: ['Numerologia', 'Numerology', 'Astrologia', 'Astrology', 'Human Design'],
-    image: site + '/images/hero-cynamon.png', sameAs: [instagram],
+    image: site + '/images/og-kaneel-jelonek.jpg', sameAs: [instagram],
     founder: { '@type': 'Person', name: 'Alexandra Orin', jobTitle: en ? 'Numerologist' : 'Numerolog', sameAs: [instagram] },
     hasOfferCatalog: {
       '@type': 'OfferCatalog', name: en ? 'Numerology readings' : 'Analizy numerologiczne',
@@ -162,6 +162,7 @@ for (const page of config.pages) {
     HREFLANG: hreflang(page), LANG_SWITCH: langSwitch(page),
     HOME: links.home, OFFER: links.offer, CALC: links.calculator, KNOW: links.knowledge, PRIVACY: links.privacy,
     TITLE: escape(page.title), DESCRIPTION: escape(page.description),
+    OG_TITLE: escape(page.ogTitle || page.title), OG_DESCRIPTION: escape(page.ogDescription || page.description),
     CANONICAL: escape(site + page.path), SITE_URL: escape(site),
     CONTACT_EMAIL: escape(email), INSTAGRAM_LINK: instagramLink(page.lang), EMAIL_LINK: emailLink(page.lang),
     FAQ_ITEMS: faqItems(faqs[page.template]), CERTIFICATES: certificatesHtml(page.lang), YEAR: new Date().getFullYear(),

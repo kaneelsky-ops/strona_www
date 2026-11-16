@@ -1,13 +1,14 @@
 {
   "siteUrl": "https://www.kaneel.pl",
   "contactEmail": "kaneelsky@gmail.com",
-  "instagramUrl": "https://www.instagram.com/orrinkaone/",
+  "instagramUrl": "https://www.instagram.com/kaneel__/",
   "pages": [
     {
       "template": "home",
       "kind": "home",
       "lang": "pl",
       "path": "/",
+      "ogTitle": "Numerologia • Astrologia • Human Design - Holistyczne sesje i analizy │ KANEEL",
       "title": "Numerologia i Numerolog Online – Analizy Numerologiczne | KANEEL",
       "description": "Numerologia (numerology) w KANEEL: portret numerologiczny, prognoza numerologiczna na rok, harmonizacja imienia i adresu, wybór dat, numerologia partnerska, dziecka i biznesowa. Z konsultacją online."
     },
